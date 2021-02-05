@@ -64,9 +64,9 @@ def main_menu():
                 pygame.mixer.music.play()
             
             if event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_UP:
+                if event.key==pygame.K_UP or event.key==pygame.K_1:
                     selected="start"
-                elif event.key==pygame.K_DOWN:
+                elif event.key==pygame.K_DOWN or event.key==pygame.K_2:
                     selected="quit"
                     
                 if event.key==pygame.K_RETURN:
@@ -135,13 +135,13 @@ def game_library():
                 pygame.mixer.music.play() 
             
             if event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_1:
+                if event.key==pygame.K_1 or event.key==pygame.K_UP:
                     selected="battleship"
-                elif event.key==pygame.K_2:
+                elif event.key==pygame.K_2 or event.key==pygame.K_DOWN:
                     selected="pong" 
-                elif event.key==pygame.K_3:
+                elif event.key==pygame.K_3 or event.key==pygame.K_DOWN:
                     selected="space"
-                elif event.key==pygame.K_4:
+                elif event.key==pygame.K_4 or event.key==pygame.K_DOWN:
                     selected="return"                
                     
                 if event.key==pygame.K_RETURN:
@@ -218,38 +218,15 @@ def game_library():
 def battleship():
     print("I'm Battleship!!!")
 
-    
-#Screen (AKA Background) 
-    screen.fill(black)
-    
-    title=text_format("BATTLESHIP", font, 90, green)      
-    
-    title_rect=title.get_rect()
-    screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
         
 def pong():
     print("I'm Pong!!!")
-#Screen (AKA Background) 
-    screen.fill(black)
-    
-    title=text_format("PONG", font, 90, green)      
-    
-    title_rect=title.get_rect()
-    screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
     
 def space():
     print("I'm Space!!!")
-#Screen (AKA Background) 
-    screen.fill(black)
-    
-    title=text_format("SPACE SHOOTERS", font, 90, green)      
-    
-    title_rect=title.get_rect()
-    screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
-    
 
 #Initialize the Game
-print("\"This is a arrow key based selector\"")
+print("\"This is a arrow key and number based selector\"")
 
 main_menu()
 pygame.quit()
