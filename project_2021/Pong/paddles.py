@@ -39,5 +39,3 @@ class Paddle(pygame.sprite.Sprite):
         #Check that you are not going too far (off the screen)
         if self.rect.y > 400:
             self.rect.y = 400
-        
-        
