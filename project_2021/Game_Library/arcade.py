@@ -114,7 +114,7 @@ def game_library():
     #print("I'm switching screens!!!")
     
     library = True
-    selected ="return"
+    selected ="battleship"
     while library:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -127,26 +127,26 @@ def game_library():
             
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_UP:
-                    selected="return"
-                elif event.key==pygame.K_DOWN:
                     selected="battleship"
                 elif event.key==pygame.K_DOWN:
-                    selected="pong"                
-                '''
+                    selected="pong" 
                 elif event.key==pygame.K_DOWN:
-                    selected="quit" '''
+                    selected="space"
+                elif event.key==pygame.K_DOWN:
+                    selected="return"                
                     
                 if event.key==pygame.K_RETURN:
+                    if selected=="battleship":
+                        print("Battleship is running")
+                        
+                    if selected=="pong":
+                        print("Pong is running")
+                        
+                    if selected=="space":
+                        print("Space Shooters is running")                    
+                    
                     if selected=="return":
                         main_menu()
-                    if selected=="battleship":
-                        print("Switching to Battleship")
-                    if selected=="pong":
-                        print("Switching to Pong")                    
-                    '''
-                    if selected=="quit":
-                        pygame.quit()
-                        quit() '''
 
         # Main Menu UI
         
@@ -155,25 +155,43 @@ def game_library():
         
         title=text_format("SELECT A GAME", font, 90, green)
         
+        if selected=="battleship":
+            text_battle=text_format("BATTLESHIP", font, 75, blue)
+        else:
+            text_battle = text_format("BATTLESHIP", font, 75, white)
+            
+        if selected=="pong":
+            text_pong=text_format("PONG", font, 75, blue)
+        else:
+            text_pong = text_format("PONG", font, 75, white)
+            
+        if selected=="space":
+            text_space=text_format("SPACE SHOOTERS", font, 75, blue)
+        else:
+            text_space = text_format("SPACE SHOOTERS", font, 75, white)        
+                
         if selected=="return":
-            text_start=text_format("RETURN", font, 75, blue)
+            text_quit=text_format("RETURN", font, 75, blue)
         else:
-            text_start = text_format("RETURN", font, 75, white)
-        '''        
-        if selected=="quit":
-            text_quit=text_format("QUIT", font, 75, blue)
-        else:
-            text_quit = text_format("QUIT", font, 75, white)'''
+            text_quit = text_format("RETURN", font, 75, white)
                     
-
+            #Only for "Select a Game"
         title_rect=title.get_rect()
-        start_rect=text_start.get_rect()
-        #quit_rect=text_quit.get_rect()
+        
+        battle_rect=text_battle.get_rect()
+        pong_rect=text_pong.get_rect()
+        space_rect=text_space.get_rect()
+        back_rect=text_quit.get_rect()
 
         # Main Menu Text
         screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
-        screen.blit(text_start, (screen_width/2 - (start_rect[2]/2), 300))
-        #screen.blit(text_quit, (screen_width/2 - (quit_rect[2]/2), 360))
+        
+        screen.blit(text_battle, (screen_width/2 - (battle_rect[2]/2), 210))
+        screen.blit(text_pong, (screen_width/2 - (pong_rect[2]/2), 270))
+        screen.blit(text_space, (screen_width/2 - (space_rect[2]/2), 330))
+        
+        screen.blit(text_quit, (screen_width/2 - (back_rect[2]/2), 390))
+        
         pygame.display.update()
         clock.tick(FPS)
         
