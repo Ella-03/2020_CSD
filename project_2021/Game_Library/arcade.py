@@ -5,8 +5,14 @@
 import pygame
 from pygame.locals import *
 import os
-#import pong.py
-#import paddles.py
+
+#Importing other game files
+ 
+#from Pong import *
+#from Space_Shooters import *
+#from battleship import * 
+
+
 
 # Game Initialization
 pygame.init()
@@ -217,13 +223,13 @@ def game_library():
 
 def battleship():
     print("I'm Battleship!!!")
-
         
 def pong():
     print("I'm Pong!!!")
     
 def space():
     print("I'm Space!!!")
+    
 
 #Initialize the Game
 print("\"This is a arrow key and number based selector\"")
