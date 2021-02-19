@@ -152,7 +152,7 @@ def game_library():
                 elif event.key==pygame.K_2 or event.key==pygame.K_DOWN:
                     selected="pong" 
                 elif event.key==pygame.K_3 or event.key==pygame.K_DOWN:
-                    selected="space"
+                    selected="break"
                 elif event.key==pygame.K_4 or event.key==pygame.K_DOWN:
                     selected="return"                
                     
@@ -165,7 +165,7 @@ def game_library():
                         #print("Pong is running")
                         pong()
                         
-                    if selected=="space":
+                    if selected=="break":
                         #print("Space Shooters is running")
                         space()
                     
@@ -190,10 +190,10 @@ def game_library():
         else:
             text_pong = text_format("PONG", font, 75, white)
             
-        if selected=="space":
-            text_space=text_format("SPACE SHOOTERS", font, 75, blue)
+        if selected=="break":
+            text_space=text_format("BREAKOUT", font, 75, blue)
         else:
-            text_space = text_format("SPACE SHOOTERS", font, 75, white)        
+            text_space = text_format("BREAKOUT", font, 75, white)        
                 
         if selected=="return":
             text_back=text_format("RETURN", font, 75, blue)
@@ -451,7 +451,9 @@ def pong():
     pygame.quit()    
     
 def space():
-    print("I'm Space!!!")
+    #print("I'm Space!!!")
+    print("\"Press the BACKSPACE key to return to the Game Library\"")
+    
     pygame.init()
  
     # Define some colors
@@ -678,11 +680,24 @@ def space():
                 pygame.time.wait(3000)
      
                 #Stop the Game
-                carryOn=False
+                #carryOn=False
+                
+                
+                #-----POPUP WINDOW----
+                # declare the window
+                window = Tk()
+                # set window title
+                window.title("Play Again?")
+                # set window width and height
+                window.configure(width=500, height=300)
+                # set window background color
+                window.configure(bg='lightgray')
+            
+                window.mainloop()                 
      
         # --- Drawing code should go here
         # First, clear the screen to dark blue.
-        screen.fill(DARKBLUE)
+        screen.fill(BLACK)
         pygame.draw.line(screen, WHITE, [0, 38], [800, 38], 2)
      
         #Display the score and the number of lives at the top of the screen
