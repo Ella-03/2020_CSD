@@ -452,8 +452,6 @@ def pong():
     
 def space():
     #print("I'm Space!!!")
-    print("\"Press the BACKSPACE key to return to the Game Library\"")
-    
     pygame.init()
  
     # Define some colors
