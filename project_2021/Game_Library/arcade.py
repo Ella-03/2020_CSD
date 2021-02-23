@@ -13,6 +13,7 @@ from Space_Shooters import *
 from battleship import * 
 from tkinter import *
 import tkinter as tk
+from tkinter import messagebox
 
 #imports for Pong
 from random import randint
@@ -163,10 +164,13 @@ def game_library():
                         
                     if selected=="pong":
                         #print("Pong is running")
+                        #pygame.mixer.music.load('8_Bit_March.mp3')
+                        pygame.mixer.music.stop()
                         pong()
                         
                     if selected=="break":
                         #print("Space Shooters is running")
+                        pygame.mixer.music.stop()
                         space()
                     
                     if selected=="return":
@@ -392,7 +396,9 @@ def pong():
                 if event.key==pygame.K_BACKSPACE: #Pressing the ESC Key will quit the game
                     screen_width=800
                     screen_height=600
-                    screen=pygame.display.set_mode((screen_width, screen_height))                    
+                    screen=pygame.display.set_mode((screen_width, screen_height))
+                    pygame.mixer.music.load('8_Bit_March.mp3')
+                    pygame.mixer.music.play()                    
                     game_library()
      
         #Moving the paddles when the use uses the arrow keys (player A) or "W/S" keys (player B) 
@@ -610,7 +616,9 @@ def space():
                 if event.key==pygame.K_BACKSPACE: #Pressing the ESC Key will quit the game
                     screen_width=800
                     screen_height=600
-                    screen=pygame.display.set_mode((screen_width, screen_height))                    
+                    screen=pygame.display.set_mode((screen_width, screen_height))
+                    pygame.mixer.music.load('8_Bit_March.mp3')
+                    pygame.mixer.music.play()                    
                     game_library()            
      
         #Moving the paddle when the use uses the arrow keys
@@ -637,11 +645,25 @@ def space():
                 text = font.render("GAME OVER", 1, WHITE)
                 screen.blit(text, (250,300))
                 pygame.display.flip()
-                pygame.time.wait(3000)
+                pygame.time.wait(5)
+                Replay()
+                #messagebox.askyesno(title="Play Again?", message="Want to play again?")
+                '''
+                if messagebox.askyesno() == True:
+                    Repl()
+                    quit()
+                else:
+                    screen_width=800
+                    screen_height=600                    
+                    pygame.mixer.music.load('8_Bit_March.mp3')
+                    pygame.mixer.music.play()                    
+                    game_library()
+                    quit()
+                '''    
      
                 #Stop the Game
                 #carryOn=False
-                
+                '''
                # declare the window
                 window = Tk()
                 # set window title
@@ -655,7 +677,7 @@ def space():
                 button2 = Button(text="No")
                 
                 window.mainloop()          
-     
+                '''
         if ball.rect.y<40:
             ball.velocity[1] = -ball.velocity[1]
      
@@ -681,8 +703,22 @@ def space():
      
                 #Stop the Game
                 #carryOn=False
+                #tk.messagebox.askyesno(title="Play Again?", message="Want to play again?", **options)
                 
+                messagebox.askyesno(title="Play Again?", message="Want to play again?")
                 
+                if messagebox.askyesno() == True:
+                    space()
+                    quit()
+                else:
+                    screen_width=800
+                    screen_height=600                    
+                    pygame.mixer.music.load('8_Bit_March.mp3')
+                    pygame.mixer.music.play()                    
+                    game_library()
+                    quit()                
+                
+                '''
                 #-----POPUP WINDOW----
                 # declare the window
                 window = Tk()
@@ -692,9 +728,11 @@ def space():
                 window.configure(width=500, height=300)
                 # set window background color
                 window.configure(bg='lightgray')
+                
+                yes = button(text="yes")
             
-                window.mainloop()                 
-     
+                window.mainloop()        
+                '''
         # --- Drawing code should go here
         # First, clear the screen to dark blue.
         screen.fill(BLACK)
@@ -718,6 +756,71 @@ def space():
      
     #Once we have exited the main program loop we can stop the game engine:
     pygame.quit()    
+    
+def Replay():
+    print("Replay!!!")
+    again = True
+    selected ="yes"
+    while again:
+        for event in pygame.event.get():
+            
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+                #If quit is not hit, loop music
+            elif event.type == pygame.constants.USEREVENT:
+                pygame.mixer.music.load('8_Bit_March.mp3')
+                pygame.mixer.music.play() 
+            
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_1 or event.key==pygame.K_UP:
+                    selected="yes"
+                elif event.key==pygame.K_2 or event.key==pygame.K_DOWN:
+                    selected="no"                    
+                    
+                if event.key==pygame.K_RETURN:
+                    if selected=="yes":
+                        space()
+                    if selected=="no":
+                        game_library()                        
+                            
+    
+            # Main Menu UI
+            
+            #Screen (AKA Background) 
+            screen.fill(black)
+            
+            title=text_format("PLAY AGAIN?", font, 90, green)
+                 
+            if selected=="yes":
+                text_yes=text_format("YES", font, 75, blue)
+            else:
+                text_yes = text_format("YES", font, 75, white)
+            
+            if selected=="no":
+                text_no=text_format("NO", font, 75, blue)
+            else:
+                text_no = text_format("NO", font, 75, white)            
+                      
+            #Only for "Title"
+            title_rect=title.get_rect()
+           
+            yes_rect=text_yes.get_rect()
+            no_rect=text_no.get_rect()
+            
+            # Main Menu Text
+            screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
+            
+            screen.blit(text_yes, (screen_width/2 - (yes_rect[2]/2), 300))
+            screen.blit(text_no, (screen_width/2 - (no_rect[2]/2), 390))
+            
+            pygame.display.update()
+            clock.tick(FPS)
+            
+            #Title
+            pygame.display.set_caption("Play Again?")    
+        
+
     
 
 #Initialize the Game
