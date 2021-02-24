@@ -33,7 +33,7 @@ screen_height=600
 screen=pygame.display.set_mode((screen_width, screen_height))
 
 #Music for game
-pygame.mixer.music.load('8_Bit_March.mp3')
+pygame.mixer.music.load('Platformer2.mp3')
 pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
 pygame.mixer.music.play()
 
@@ -73,7 +73,7 @@ def main_menu():
                 quit()
                 #If quit is not hit, loop music
             elif event.type == pygame.constants.USEREVENT:
-                pygame.mixer.music.load('8_Bit_March.mp3')
+                pygame.mixer.music.load('Platformer2.mp3')
                 pygame.mixer.music.play()
             
             if event.type==pygame.KEYDOWN:
@@ -144,7 +144,7 @@ def game_library():
                 quit()
                 #If quit is not hit, loop music
             elif event.type == pygame.constants.USEREVENT:
-                pygame.mixer.music.load('8_Bit_March.mp3')
+                pygame.mixer.music.load('Platformer2.mp3')
                 pygame.mixer.music.play() 
             
             if event.type==pygame.KEYDOWN:
@@ -164,7 +164,7 @@ def game_library():
                         
                     if selected=="pong":
                         #print("Pong is running")
-                        #pygame.mixer.music.load('8_Bit_March.mp3')
+                        #pygame.mixer.music.load('Platformer2.mp3')
                         pygame.mixer.music.stop()
                         pong()
                         
@@ -243,7 +243,7 @@ def battleship():
                 quit()
                 #If quit is not hit, loop music
             elif event.type == pygame.constants.USEREVENT:
-                pygame.mixer.music.load('8_Bit_March.mp3')
+                pygame.mixer.music.load('Platformer2.mp3')
                 pygame.mixer.music.play() 
             
             if event.type==pygame.KEYDOWN:
@@ -397,7 +397,7 @@ def pong():
                     screen_width=800
                     screen_height=600
                     screen=pygame.display.set_mode((screen_width, screen_height))
-                    pygame.mixer.music.load('8_Bit_March.mp3')
+                    pygame.mixer.music.load('Platformer2.mp3')
                     pygame.mixer.music.play()                    
                     game_library()
      
@@ -429,7 +429,9 @@ def pong():
      
         #Detect collisions between the ball and the paddles
         if pygame.sprite.collide_mask(ball, paddleA) or pygame.sprite.collide_mask(ball, paddleB):
-          ball.bounce()
+            pygame.mixer.music.load('paddle.wav')
+            pygame.mixer.music.play()            
+            ball.bounce()
         
         # --- Drawing code should go here
         # First, clear the screen to black. 
@@ -472,7 +474,7 @@ def space():
     BLACK = (0,0,0)
      
     score = 0
-    lives = 3
+    lives = 5
     
     #-----Paddles------
     class Paddle(pygame.sprite.Sprite):
@@ -617,7 +619,7 @@ def space():
                     screen_width=800
                     screen_height=600
                     screen=pygame.display.set_mode((screen_width, screen_height))
-                    pygame.mixer.music.load('8_Bit_March.mp3')
+                    pygame.mixer.music.load('Platformer2.mp3')
                     pygame.mixer.music.play()                    
                     game_library()            
      
@@ -640,13 +642,17 @@ def space():
             ball.velocity[1] = -ball.velocity[1]
             lives -= 1
             if lives == 0:
+                pygame.mixer.music.load('wah-wah-wah-sound-effect.mp3')
+                pygame.mixer.music.play()
                 #Display Game Over Message for 3 seconds
                 font = pygame.font.Font(None, 74)
                 text = font.render("GAME OVER", 1, WHITE)
                 screen.blit(text, (250,300))
-                pygame.display.flip()
-                pygame.time.wait(5)
-                Replay()
+                pygame.display.flip() 
+                pygame.time.wait(2000)
+
+                pygame.mixer.music.stop()                
+                ReplayL()
                 #messagebox.askyesno(title="Play Again?", message="Want to play again?")
                 '''
                 if messagebox.askyesno() == True:
@@ -655,7 +661,7 @@ def space():
                 else:
                     screen_width=800
                     screen_height=600                    
-                    pygame.mixer.music.load('8_Bit_March.mp3')
+                    pygame.mixer.music.load('Platformer2.mp3')
                     pygame.mixer.music.play()                    
                     game_library()
                     quit()
@@ -685,26 +691,35 @@ def space():
         if pygame.sprite.collide_mask(ball, paddle):
             ball.rect.x -= ball.velocity[0]
             ball.rect.y -= ball.velocity[1]
+            pygame.mixer.music.load('paddle.wav')
+            pygame.mixer.music.play()            
             ball.bounce()
      
         #Check if there is the ball collides with any of bricks
         brick_collision_list = pygame.sprite.spritecollide(ball,all_bricks,False)
         for brick in brick_collision_list:
+            pygame.mixer.music.load('paddle.wav')
+            pygame.mixer.music.play()            
             ball.bounce()
             score += 1
             brick.kill()
             if len(all_bricks)==0:
+                pygame.mixer.music.load('Positive-game-notification.mp3')
+                pygame.mixer.music.play()
+                
                #Display Level Complete Message for 3 seconds
                 font = pygame.font.Font(None, 74)
                 text = font.render("LEVEL COMPLETE", 1, WHITE)
                 screen.blit(text, (200,300))
                 pygame.display.flip()
-                pygame.time.wait(3000)
-     
+                pygame.time.wait(3)
+                pygame.mixer.music.stop()
+                ReplayW()
+                
                 #Stop the Game
                 #carryOn=False
                 #tk.messagebox.askyesno(title="Play Again?", message="Want to play again?", **options)
-                
+                '''
                 messagebox.askyesno(title="Play Again?", message="Want to play again?")
                 
                 if messagebox.askyesno() == True:
@@ -713,12 +728,12 @@ def space():
                 else:
                     screen_width=800
                     screen_height=600                    
-                    pygame.mixer.music.load('8_Bit_March.mp3')
+                    pygame.mixer.music.load('Platformer2.mp3')
                     pygame.mixer.music.play()                    
                     game_library()
                     quit()                
                 
-                '''
+                
                 #-----POPUP WINDOW----
                 # declare the window
                 window = Tk()
@@ -757,8 +772,8 @@ def space():
     #Once we have exited the main program loop we can stop the game engine:
     pygame.quit()    
     
-def Replay():
-    print("Replay!!!")
+def ReplayL():
+    #print("Replay Loser!!!")
     again = True
     selected ="yes"
     while again:
@@ -769,7 +784,7 @@ def Replay():
                 quit()
                 #If quit is not hit, loop music
             elif event.type == pygame.constants.USEREVENT:
-                pygame.mixer.music.load('8_Bit_March.mp3')
+                pygame.mixer.music.load('Platformer2.mp3')
                 pygame.mixer.music.play() 
             
             if event.type==pygame.KEYDOWN:
@@ -780,9 +795,78 @@ def Replay():
                     
                 if event.key==pygame.K_RETURN:
                     if selected=="yes":
+                        pygame.mixer.music.stop()                        
                         space()
                     if selected=="no":
-                        game_library()                        
+                        pygame.mixer.music.load('Platformer2.mp3')
+                        pygame.mixer.music.play()                        
+                        game_library()
+                            
+    
+            # Main Menu UI
+            
+            #Screen (AKA Background) 
+            screen.fill(black)
+            
+            title=text_format("TRY AGAIN?", font, 90, green)
+                 
+            if selected=="yes":
+                text_yes=text_format("YES", font, 75, blue)
+            else:
+                text_yes = text_format("YES", font, 75, white)
+            
+            if selected=="no":
+                text_no=text_format("NO", font, 75, blue)
+            else:
+                text_no = text_format("NO", font, 75, white)            
+                      
+            #Only for "Title"
+            title_rect=title.get_rect()
+           
+            yes_rect=text_yes.get_rect()
+            no_rect=text_no.get_rect()
+            
+            # Main Menu Text
+            screen.blit(title, (screen_width/2 - (title_rect[2]/2), 80))
+            
+            screen.blit(text_yes, (screen_width/2 - (yes_rect[2]/2), 300))
+            screen.blit(text_no, (screen_width/2 - (no_rect[2]/2), 390))
+            
+            pygame.display.update()
+            clock.tick(FPS)
+            
+            #Title
+            pygame.display.set_caption("Try Again?")            
+                        
+def ReplayW():
+    print("Replay Winner!!!")
+    again = True
+    selected ="yes"
+    while again:
+        for event in pygame.event.get():
+            
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+                #If quit is not hit, loop music
+            elif event.type == pygame.constants.USEREVENT:
+                pygame.mixer.music.load('Platformer2.mp3')
+                pygame.mixer.music.play() 
+            
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_1 or event.key==pygame.K_UP:
+                    selected="yes"
+                elif event.key==pygame.K_2 or event.key==pygame.K_DOWN:
+                    selected="no"                    
+                    
+                if event.key==pygame.K_RETURN:
+                    if selected=="yes":
+                        pygame.mixer.music.stop()
+                        space()
+                    if selected=="no":
+                        pygame.mixer.music.load('Platformer2.mp3')
+                        pygame.mixer.music.play()                        
+                        game_library()
                             
     
             # Main Menu UI
