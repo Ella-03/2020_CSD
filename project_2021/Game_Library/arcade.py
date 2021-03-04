@@ -91,7 +91,7 @@ def music():
                 elif event.key==pygame.K_DOWN or event.key==pygame.K_2:
                     selected="on"
                 elif event.key==pygame.K_DOWN or event.key==pygame.K_3:
-                    selected="return"                
+                    selected="return"             
                     
                 if event.key==pygame.K_RETURN:
                     if selected=="off":
@@ -259,7 +259,11 @@ def game_library():
                 elif event.key==pygame.K_3 or event.key==pygame.K_DOWN:
                     selected="break"
                 elif event.key==pygame.K_4 or event.key==pygame.K_DOWN:
-                    selected="return"                
+                    selected="return"
+                elif event.key==pygame.K_BACKSPACE:
+                    main_menu()
+                elif event.key==pygame.K_ESCAPE:
+                    quit()            
                     
                 if event.key==pygame.K_RETURN:
                     if selected=="battleship":
@@ -456,8 +460,8 @@ def pong():
     
         # --- Main event loop
         for event in pygame.event.get(): #If the user did something
-            if event.type == pygame.QUIT or event.type == pygame.K_ESCAPE: #If the user closes the app
-                carryOn = False #Stops the program
+            if event.type == pygame.QUIT: #If the user closes the app
+                carryOn = False #Stops the program             
             elif event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_BACKSPACE: #Pressing the ESC Key will quit the game
                     screen_width=800
@@ -494,12 +498,12 @@ def pong():
         if ball.rect.y<0:
             ball.velocity[1] = -ball.velocity[1]     
             
-        if scoreA == 30:
+        if scoreA == 15:
             screen_width=800
             screen_height=600
             screen=pygame.display.set_mode((screen_width, screen_height))            
             P1()
-        elif scoreB == 30:
+        elif scoreB == 15:
             screen_width=800
             screen_height=600
             screen=pygame.display.set_mode((screen_width, screen_height))            
@@ -570,7 +574,9 @@ def P1():
                 if event.key==pygame.K_1 or event.key==pygame.K_UP:
                     selected="yes"
                 elif event.key==pygame.K_2 or event.key==pygame.K_DOWN:
-                    selected="no"                    
+                    selected="no"
+                elif event.key==pygame.K_ESCAPE:
+                    quit()                
                     
                 if event.key==pygame.K_RETURN:
                     if selected=="yes":
@@ -651,7 +657,9 @@ def P2():
                 if event.key==pygame.K_1 or event.key==pygame.K_UP:
                     selected="yes"
                 elif event.key==pygame.K_2 or event.key==pygame.K_DOWN:
-                    selected="no"                    
+                    selected="no"
+                elif event.key==pygame.K_ESCAPE:
+                    quit()                
                     
                 if event.key==pygame.K_RETURN:
                     if selected=="yes":
@@ -859,6 +867,8 @@ def breakout():
         for event in pygame.event.get(): # User did something
             if event.type == pygame.QUIT: # If user clicked close
                 carryOn = False # Flag that we are done so we exit this loop
+            elif event.type == pygame.K_ESCAPE:
+                quit()            
             elif event.type == pygame.KEYDOWN:
                 if event.key==pygame.K_BACKSPACE: #Pressing the ESC Key will quit the game
                     screen_width=800
@@ -1035,7 +1045,9 @@ def ReplayL():
                 if event.key==pygame.K_1 or event.key==pygame.K_UP:
                     selected="yes"
                 elif event.key==pygame.K_2 or event.key==pygame.K_DOWN:
-                    selected="no"                    
+                    selected="no"
+                elif event.key==pygame.K_ESCAPE:
+                    quit()                
                     
                 if event.key==pygame.K_RETURN:
                     if selected=="yes":
@@ -1103,7 +1115,9 @@ def ReplayW():
                 if event.key==pygame.K_1 or event.key==pygame.K_UP:
                     selected="yes"
                 elif event.key==pygame.K_2 or event.key==pygame.K_DOWN:
-                    selected="no"                    
+                    selected="no"
+                elif event.key==pygame.K_ESCAPE:
+                    quit()                
                     
                 if event.key==pygame.K_RETURN:
                     if selected=="yes":
